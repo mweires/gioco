@@ -6,8 +6,8 @@ class Gioco
 
     def self.related_info(resource, points, kind)
       if KINDS && kind
-        old_pontuation  = resource.points.where(:kind_id => kind.id).sum(:value)
-        related_badges  = Badge.where(((old_pontuation < points) ? "points <= #{points}" : "points > #{points} AND points <= #{old_pontuation}") + " AND kind_id = #{kind.id}")
+        old_pontuation  = resource.points.where(:badge_kind_id => kind.id).sum(:value)
+        related_badges  = Badge.where(((old_pontuation < points) ? "points <= #{points}" : "points > #{points} AND points <= #{old_pontuation}") + " AND badge_kind_id = #{kind.id}")
       else
         old_pontuation  = resource.points.to_i
         related_badges  = Badge.where((old_pontuation < points) ? "points <= #{points}" : "points > #{points} AND points <= #{old_pontuation}")
@@ -27,7 +27,7 @@ class Gioco
 
       Badge.transaction do
           if KINDS && kind
-          resource.points << Point.create({ :kind_id => kind.id, :value => new_pontuation })
+          resource.points << Point.create({ :badge_kind_id => kind.id, :value => new_pontuation })
         elsif POINTS
           resource.update_attribute( :points, points )
         end

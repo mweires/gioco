@@ -6,10 +6,10 @@ class Gioco
       Kind.all.each do |t|
         data = RESOURCE_NAME.capitalize.constantize
                 .select("#{RESOURCE_NAME.capitalize.constantize.table_name}.*, 
-                         points.kind_id, SUM(points.value) AS kind_points")
-                .where("points.kind_id = #{t.id}")
+                         points.badge_kind_id, SUM(points.value) AS kind_points")
+                .where("points.badge_kind_id = #{t.id}")
                 .joins(:points)
-                .group("kind_id, #{RESOURCE_NAME}_id")
+                .group("badge_kind_id, #{RESOURCE_NAME}_id")
                 .order("kind_points DESC")
 
         ranking << { :kind => t, :ranking => data }

@@ -1,3 +1,5 @@
+**Note**: This gem is used on privates projects. A handful of variables have been and will be renamed. All credit goes to Mr. Moura.
+
 ![Alt text](http://giocoapp.github.io/gioco/assets/images/logo.png "A gamification gem for Ruby on Rails applications")
 
 # Gioco (current version - 1.1.1)
